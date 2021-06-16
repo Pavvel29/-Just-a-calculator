@@ -124,6 +124,7 @@ document.querySelectorAll('.keyboard__key').forEach(element => {
             trigerButtomRed = true;
          }
          if (select === "=") {
+                  
             if ((num1 || num1 === 0) && opiration) {
                document.querySelectorAll('.keyboard__key').forEach(element => {
                   element.classList.remove('inter--color');
@@ -134,7 +135,7 @@ document.querySelectorAll('.keyboard__key').forEach(element => {
                
                tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2));
                if(tank.length > 14){
-               tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2)/*.toFixed(3)*/)
+               tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2).toFixed(3))
                if(tank.length > 14){
                   document.querySelector('.display__item').classList.add('number--big');
                   if(tank.length > 25){

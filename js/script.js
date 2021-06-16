@@ -134,7 +134,7 @@ document.querySelectorAll('.keyboard__key').forEach(function (element) {
                     num2 = +tank;
                     tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2));
                     if (tank.length > 14) {
-                        tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2) /*.toFixed(3)*/);
+                        tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2).toFixed(3));
                         if (tank.length > 14) {
                             document.querySelector('.display__item').classList.add('number--big');
                             if (tank.length > 25) {
