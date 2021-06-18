@@ -32,6 +32,10 @@ var trigerButtomRed = true;
 var reg = /^-?\d*\.?\d*$/;
 var reg2 = /\D/;
 var tank = '';
+var startIt = false;
+var stopIt = true;
+var intDat = false;
+var init = 0;
 document.querySelectorAll('.keyboard__key').forEach(function (element) {
     element.addEventListener('click', function () {
         if (triger === true && !(((this.textContent === '-') || (this.textContent === '+')) ||
@@ -132,9 +136,51 @@ document.querySelectorAll('.keyboard__key').forEach(function (element) {
                     element.classList.remove('inter--colorRedy');
                     tank = document.querySelector('.display__item').textContent;
                     num2 = +tank;
-                    tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2));
+                    (String(calculator(num1, opiration, num2))).split('').forEach(function (element) {
+                        if (element === '.') {
+                            startIt = true;
+                            stopIt = false;
+                        }
+                        else if (startIt === true) {
+                            init++;
+                            if (element === '0') {
+                                intDat = true;
+                            }
+                        }
+                    });
+                    if (intDat) {
+                        tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2).toFixed(init));
+                        init = 0;
+                        intDat = false;
+                    }
+                    else {
+                        tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2));
+                    }
+                    if (stopIt) {
+                        tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2));
+                    }
+                    startIt = false;
+                    stopIt = true;
                     if (tank.length > 14) {
-                        tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2).toFixed(3));
+                        (String(calculator(num1, opiration, num2))).split('').forEach(function (element) {
+                            if (element === '.') {
+                                startIt = true;
+                                stopIt = false;
+                            }
+                            else if (startIt === true) {
+                                init++;
+                                if (element === '0') {
+                                    tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2).toFixed(init));
+                                    init = 0;
+                                }
+                            }
+                        });
+                        if (stopIt) {
+                            tank = document.querySelector('.display__item').textContent = String(calculator(num1, opiration, num2));
+                        }
+                        startIt = false;
+                        stopIt = true;
+                        //-----------------------------------------------------------------------------------------------------------------------------------------------
                         if (tank.length > 14) {
                             document.querySelector('.display__item').classList.add('number--big');
                             if (tank.length > 25) {
